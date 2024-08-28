@@ -9,9 +9,9 @@
 using namespace std;
 
 string chooseSecretWord(vector<string> &words) {
-	srand(time(nullptr));
+	srand((unsigned) time(nullptr));
 
-	int sortedIndex = rand() % words.size();
+	int sortedIndex = (int) (rand() % words.size());
 	return words[sortedIndex];
 }
 
@@ -22,13 +22,18 @@ bool stringContains(string &s, char element) {
  * s[0] -> "S"
  * s[1] -> "T"
  * etc.
+ *
+ * for (char c : s) {
+ * 		if (c == element) {
+ * 			return true;
+ * 		}
+ * 	}
+ * 	return false;
  */
-	for (char c : s) {
-		if (c == element) {
-			return true;
-		}
-	}
-	return false;
+
+	return any_of(s.begin(), s.end(), [element](char c) {
+		return c == element;
+	});
 }
 
 void guess(string &word, map<char, bool> &guessed, vector<char> &errors) {
@@ -41,7 +46,7 @@ void guess(string &word, map<char, bool> &guessed, vector<char> &errors) {
 		return;
 	}
 
-	guess = toupper(guess);
+	guess = (char) toupper(guess);
 
 	if (guessed[guess]) {
 		cout << "\nYou've already typed that letter...\n" << endl;
@@ -81,12 +86,12 @@ void hangmanGame(vector<string> &words) {
 		// TODO: clear screen
 		printGame(secretWord, guessed, errors);
 		guess(secretWord, guessed, errors);
-	} while (!(win(secretWord, guessed) || hanged(errors.size())));
+	} while (!(win(secretWord, guessed) || hanged((int) errors.size())));
 
 	// printing game one more time
 	printGame(secretWord, guessed, errors);
 
-	if (hanged(errors.size())) {
+	if (hanged((int) errors.size())) {
 		printHanged();
 	} else {
 		printWin();

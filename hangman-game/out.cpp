@@ -4,23 +4,6 @@
 
 using namespace std;
 
-void printHeader() {
-	cout << "  _______ " << endl;
-	cout << " |/      |" << endl;
-	cout << " |" << endl;
-	cout << " |          THE HANGMAN" << endl;
-	cout << " |             GAME" << endl;
-	cout << " |" << endl;
-	cout << " |" << endl;
-	cout << "_|___\n" << endl;
-}
-
-void printMenu() {
-	cout << "-- MENU --\n" << endl;
-	cout << "[1] Play game" << endl;
-	cout << "[2] Add word\n" << endl;
-}
-
 void printGibbet(int errorCount) {
 	string head = errorCount >= 1 ? "(_)" : "";       // head      -> errors >= 1
 	string body = errorCount >= 4 ? "/|\\" :          // right arm -> errors >= 4
@@ -60,42 +43,8 @@ void printWrongGuesses(vector<char> &errors) {
 }
 
 void printGame(string &word, map<char, bool> &guesses, vector<char> &errors) {
-	printGibbet(errors.size());
+	printGibbet((int) errors.size());
 	printSecretWord(word, guesses);
 	printWrongGuesses(errors);
 	cout << endl;
-}
-
-void printHanged() {
-	cout << "      _______________" << endl;
-	cout << "     /               \\" << endl;
-	cout << "    /                 \\" << endl;
-	cout << "  //                   \\/\\" << endl;
-	cout << "  \\|   XXXX     XXXX   | /" << endl;
-	cout << "   |   XXXX     XXXX   |/" << endl;
-	cout << "   |   XXX       XXX   |" << endl;
-	cout << "   |                   |" << endl;
-	cout << "   \\__      XXX      __/" << endl;
-	cout << "     |\\     XXX     /|" << endl;
-	cout << "     | |           | |" << endl;
-	cout << "     | I I I I I I I |" << endl;
-	cout << "     |  I I I I I I  |" << endl;
-	cout << "     \\_             _/" << endl;
-	cout << "       \\_         _/" << endl;
-	cout << "         \\_______/\n" << endl;
-	cout << "Sorry, you were hanged..." << endl;
-}
-
-void printWin() {
-	cout << "       ___________" << endl;
-	cout << "      '._==_==_=_.'" << endl;
-	cout << "      .-\\:      /-." << endl;
-	cout << "     | (|:.     |) |" << endl;
-	cout << "      '-|:.     |-'" << endl;
-	cout << "        \\::.    /" << endl;
-	cout << "         '::. .'" << endl;
-	cout << "           ) (" << endl;
-	cout << "         _.' '._" << endl;
-	cout << "        '-------'\n" << endl;
-	cout << "Congratulations, you won!" << endl;
 }

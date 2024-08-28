@@ -39,10 +39,10 @@ void writeFile(vector<string> &words) {
 		exit(-1);
 	}
 
-	int wordCount = words.size();
+	int wordCount = (int) words.size();
 	file << wordCount << endl;
 
-	for (string word : words) {
+	for (string &word : words) {
 		file << word << endl;
 	}
 

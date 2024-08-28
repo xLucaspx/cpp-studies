@@ -27,7 +27,7 @@ void addWord(vector<string> &words) {
 
 	// ensuring upper case
 	for (char &c : newWord) {
-		c = toupper(c);
+		c = (char) toupper(c);
 	}
 
 	// no duplicates! find returns `last` param if no iterator is found

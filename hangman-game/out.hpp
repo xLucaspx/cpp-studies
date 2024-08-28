@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <map>
 #include <string>
 #include <vector>
@@ -7,12 +8,65 @@
 /**
  * Prints the game header.
  */
-void printHeader();
+inline void printHeader() {
+	std::cout << "  _______ " << std::endl;
+	std::cout << " |/      |" << std::endl;
+	std::cout << " |" << std::endl;
+	std::cout << " |   THE HANGMAN" << std::endl;
+	std::cout << " |      GAME" << std::endl;
+	std::cout << " |" << std::endl;
+	std::cout << " |" << std::endl;
+	std::cout << "_|___\n" << std::endl;
+}
 
 /**
  * Prints the game menu options.
  */
-void printMenu();
+inline void printMenu() {
+	std::cout << "-- MENU --\n" << std::endl;
+	std::cout << "[1] Play game" << std::endl;
+	std::cout << "[2] Add word\n" << std::endl;
+}
+
+/**
+ * Procedure for printing a lost game message.
+ */
+inline void printHanged() {
+	std::cout << "      _______________" << std::endl;
+	std::cout << "     /               \\" << std::endl;
+	std::cout << "    /                 \\" << std::endl;
+	std::cout << "  //                   \\/\\" << std::endl;
+	std::cout << "  \\|    XXX      XXX    | /" << std::endl;
+	std::cout << "   |   XXX      XXX    |/" << std::endl;
+	std::cout << "   |    XXX      XXX   |" << std::endl;
+	std::cout << "   |                   |" << std::endl;
+	std::cout << "   \\__      XXX      __/" << std::endl;
+	std::cout << "     |\\     XXX     /|" << std::endl;
+	std::cout << "     | |           | |" << std::endl;
+	std::cout << "     | I I I I I I I |" << std::endl;
+	std::cout << "     |  I I I I I I  |" << std::endl;
+	std::cout << "     \\_             _/" << std::endl;
+	std::cout << "       \\_         _/" << std::endl;
+	std::cout << "         \\_______/\n" << std::endl;
+	std::cout << "Sorry, you were hanged..." << std::endl;
+}
+
+/**
+ * Procedure for printing a game win message.
+ */
+inline void printWin() {
+	std::cout << "       ___________" << std::endl;
+	std::cout << "      '._==_==_=_.'" << std::endl;
+	std::cout << "      .-\\:      /-." << std::endl;
+	std::cout << "     | (|:.     |) |" << std::endl;
+	std::cout << "      '-|:.     |-'" << std::endl;
+	std::cout << "        \\::.    /" << std::endl;
+	std::cout << "         '::. .'" << std::endl;
+	std::cout << "           ) (" << std::endl;
+	std::cout << "         _.' '._" << std::endl;
+	std::cout << "        '-------'\n" << std::endl;
+	std::cout << "Congratulations, you won!" << std::endl;
+}
 
 /**
  * Draws the gibbet according to the error count passed as argument, following the rules:
@@ -85,13 +139,3 @@ void printWrongGuesses(std::vector<char> &errors);
  * @param errors the vector containing the wrong guesses
  */
 void printGame(std::string &word, std::map<char, bool> &guesses, std::vector<char> &errors);
-
-/**
- * Procedure for printing a lost game message.
- */
-void printHanged();
-
-/**
- * Procedure for printing a game win message.
- */
-void printWin();

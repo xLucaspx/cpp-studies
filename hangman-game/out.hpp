@@ -1,5 +1,8 @@
-#ifndef HANGMAN_GAME_OUT_H
-#define HANGMAN_GAME_OUT_H
+#pragma once
+
+#include <map>
+#include <string>
+#include <vector>
 
 /**
  * Prints the game header.
@@ -92,5 +95,3 @@ void printHanged();
  * Procedure for printing a game win message.
  */
 void printWin();
-
-#endif //HANGMAN_GAME_OUT_H

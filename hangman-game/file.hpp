@@ -1,7 +1,8 @@
-#ifndef HANGMAN_GAME_FILE_H
-#define HANGMAN_GAME_FILE_H
-
+#pragma once
 #define WORDS_FILE_NAME "words.txt"
+
+#include <string>
+#include <vector>
 
 /**
  * Retrieves all words available for the game.
@@ -18,5 +19,3 @@ std::vector<std::string> getWords();
  * @param words the new list of words available for the game
  */
 void writeFile(std::vector<std::string> &words);
-
-#endif //HANGMAN_GAME_FILE_H

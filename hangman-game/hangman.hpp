@@ -1,7 +1,9 @@
-#ifndef HANGMAN_GAME_HANGMAN_H
-#define HANGMAN_GAME_HANGMAN_H
-
+#pragma once
 #define MAX_TRIES 6
+
+#include <map>
+#include <string>
+#include <vector>
 
 /**
  * Choose a random word from the vector of strings passed as argument.
@@ -60,5 +62,3 @@ bool hanged(int errorCount);
  * going to choose one of them to be the secret word of the round
  */
 void hangmanGame(std::vector<std::string> &words);
-
-#endif // HANGMAN_GAME_HANGMAN_H

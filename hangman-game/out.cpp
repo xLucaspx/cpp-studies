@@ -1,7 +1,6 @@
 #include <iostream>
-#include <map>
-#include <vector>
-#include "hangman.h"
+#include "hangman.hpp"
+#include "out.hpp"
 
 using namespace std;
 
@@ -84,7 +83,7 @@ void printHanged() {
 	cout << "     \\_             _/" << endl;
 	cout << "       \\_         _/" << endl;
 	cout << "         \\_______/\n" << endl;
-	cout << "Sorry, you were hanged...\n" << endl;
+	cout << "Sorry, you were hanged..." << endl;
 }
 
 void printWin() {
@@ -98,5 +97,5 @@ void printWin() {
 	cout << "           ) (" << endl;
 	cout << "         _.' '._" << endl;
 	cout << "        '-------'\n" << endl;
-	cout << "Congratulations, you won!\n" << endl;
+	cout << "Congratulations, you won!" << endl;
 }

@@ -2,12 +2,9 @@
 #include <ctime>
 #include <fstream>
 #include <iostream>
-#include <map>
 #include <regex>
-#include <string> // needed for using strings in c++
-#include <vector>
-#include "hangman.h"
-#include "out.h"
+#include "hangman.hpp"
+#include "out.hpp"
 
 using namespace std;
 
@@ -93,6 +90,9 @@ void hangmanGame(vector<string> &words) {
 		printHanged();
 	} else {
 		printWin();
+		if (errors.empty()) {
+			cout << "FLAWLESS VICTORY!" << endl;
+		}
 	}
-	cout << "The secret word was -> " << secretWord << " <-\n" << endl;
+	cout << "\nThe secret word was -> " << secretWord << " <-\n" << endl;
 }

@@ -6,9 +6,9 @@
 #include <regex>
 #include <string>
 #include <vector>
-#include "out.h"
-#include "file.h"
-#include "hangman.h"
+#include "out.hpp"
+#include "file.hpp"
+#include "hangman.hpp"
 
 using namespace std;
 

@@ -1,6 +1,7 @@
 #pragma once
 #define MAX_TRIES 6
 
+#include<array>
 #include <map>
 #include <string>
 #include <vector>
@@ -21,7 +22,7 @@ namespace Hangman {
 	* @param element <em>needle</em>; the element being searched for in the string
 	* @return <code>true</code> if the string contains the char passed as argument, <code>false</code> otherwise
 	*/
-	bool stringContains(const std::string &s, char element);
+	bool stringContains(const std::string &s, const char &element);
 
 	/**
 	* Procedure that asks the player for it's guess, validates it and updates the game current state by
@@ -30,9 +31,11 @@ namespace Hangman {
 	* @param word the secret word, used here to check if the player's guess is correct
 	* @param guessed map containing already guessed letters, used to keep track of guesses; may be updated
 	* with the new guess
-	* @param errors vector of chars containing all wrong guesses; may be updated if the new guess is incorrect
+	* @param errors array of chars containing wrong guesses; may be updated if the new guess is incorrect
+	* @param errorCount total wrong guesses; tracks errors array current position and may be updated if the
+	 * new guess is incorrect
 	*/
-	void guess(const std::string &word, std::map<char, bool> &guessed, std::vector<char> &errors);
+	void guess(const std::string &word, std::map<char, bool> &guessed, std::array<char, 6> &errors, int &errorCount);
 
 	/**
 	* Function that determines if the game was won by checking if all the letters from
@@ -54,7 +57,7 @@ namespace Hangman {
 	* @return <code>true</code> if the player lost (i.e. the number of error is GTE the number of tries),
 	* <code>false</code> otherwise
 	*/
-	bool hanged(int errorCount);
+	bool hanged(const int &errorCount);
 
 	/**
 	* Runs one round of the hangman game; lasts until the player wins or gets hanged.

@@ -2,14 +2,14 @@
 #include "hangman.hpp"
 #include "out.hpp"
 
-void Hangman::printGibbet(int errorCount) {
+void Hangman::printGibbet(const int &errorCount) {
 	std::string head = errorCount >= 1 ? "(_)" : "";       // head      -> errors >= 1
 	std::string body = errorCount >= 4 ? "/|\\" :          // right arm -> errors >= 4
 										 errorCount >= 3 ? "/|" :            // left arm  -> errors >= 3
 										 errorCount >= 2 ? " |" : "";        // body      -> errors >= 2
 	std::string lowerBody = errorCount >= 2 ? " |" : "";    // body      -> errors >= 2
 	std::string legs = errorCount >= 5 ?                   // right leg -> errors >= 5
-										 errorCount >= 6 ? "/\\" : "/" : ""; // left leg  -> errors >= 6
+										 errorCount >= 6 ? "/ \\" : "/" : ""; // left leg  -> errors >= 6
 
 	printf("\nLives: %d of %d\n", MAX_TRIES - errorCount, MAX_TRIES);
 
@@ -33,19 +33,20 @@ void Hangman::printSecretWord(const std::string &word, const std::map<char, bool
 	std::cout << std::endl;
 }
 
-void Hangman::printWrongGuesses(const std::vector<char> &errors) {
+void Hangman::printWrongGuesses(const std::array<char, 6> &errors, const int &errorCount) {
 	std::cout << "\nWrong letters:" << std::endl;
 
-	for (char c : errors) {
-		std::cout << c << " - ";
+	for (int i = 0; i < errorCount; i++) {
+		std::cout << errors[i] << (i == errorCount - 1 ? "" : " - ");
 	}
 
 	std::cout << std::endl;
 }
 
-void Hangman::printGame(const std::string &word, const std::map<char, bool> &guesses, const std::vector<char> &errors) {
-	Hangman::printGibbet((int) errors.size());
+void Hangman::printGame(const std::string &word, const std::map<char, bool> &guesses, const std::array<char, 6> &errors,
+												const int &errorCount) {
+	Hangman::printGibbet(errorCount);
 	Hangman::printSecretWord(word, guesses);
-	Hangman::printWrongGuesses(errors);
+	Hangman::printWrongGuesses(errors, errorCount);
 	std::cout << std::endl;
 }

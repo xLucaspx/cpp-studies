@@ -20,6 +20,7 @@ std::vector<std::string> Hangman::getWords() {
 	for (int i = 0; i < wordCount; i++) {
 		std::string word;
 		file >> word;
+
 		words.push_back(word);
 	}
 

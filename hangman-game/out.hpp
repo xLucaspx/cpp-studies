@@ -1,5 +1,6 @@
 #pragma once
 
+#include <array>
 #include <iostream>
 #include <map>
 #include <string>
@@ -113,7 +114,7 @@ namespace Hangman {
 	*
 	* @param errorCount total wrong guesses
 	*/
-	void printGibbet(int errorCount);
+	void printGibbet(const int &errorCount);
 
 	/**
 	* Prints the secret word with underscores replacing non guessed letters.
@@ -129,7 +130,7 @@ namespace Hangman {
 	*
 	* @param errors the vector containing the wrong guesses
 	*/
-	void printWrongGuesses(const std::vector<char> &errors);
+	void printWrongGuesses(const std::array<char, 6> &errors, const int &errorCount);
 
 	/**
 	* Calls on other procedures to draw rhe game.
@@ -139,5 +140,6 @@ namespace Hangman {
 	* (<code>true</code> for guessed letters, <code>false</code> otherwise)
 	* @param errors the vector containing the wrong guesses
 	*/
-	void printGame(const std::string &word, const std::map<char, bool> &guesses, const std::vector<char> &errors);
+	void printGame(const std::string &word, const std::map<char, bool> &guesses, const std::array<char, 6> &errors,
+								 const int &errorCount);
 }

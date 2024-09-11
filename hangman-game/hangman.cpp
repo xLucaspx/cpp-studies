@@ -13,7 +13,7 @@ std::string Hangman::chooseSecretWord(const std::vector<std::string> &words) {
 	return words[sortedIndex];
 }
 
-bool Hangman::stringContains(const std::string &s, char element) {
+bool Hangman::stringContains(const std::string &s, const char &element) {
 /* a string is char vector. E.g.:
  * string s = "string" -> | s | t | r | i | n | g |
  *                        | 0 | 1 | 2 | 3 | 4 | 5 |
@@ -34,7 +34,8 @@ bool Hangman::stringContains(const std::string &s, char element) {
 	});
 }
 
-void Hangman::guess(const std::string &word, std::map<char, bool> &guessed, std::vector<char> &errors) {
+void Hangman::guess(const std::string &word, std::map<char, bool> &guessed, std::array<char, 6> &errors,
+										int &errorCount) {
 	char guess;
 	std::cout << "What's your guess? ";
 	std::cin >> guess;
@@ -54,7 +55,8 @@ void Hangman::guess(const std::string &word, std::map<char, bool> &guessed, std:
 	guessed[guess] = true;
 	if (!Hangman::stringContains(word, guess)) {
 		std::cout << "\nThe secret word doesn't contain the letter " << guess << std::endl << std::endl;
-		errors.push_back(guess);
+		errors[errorCount] = guess;
+		errorCount++;
 		return;
 	}
 
@@ -70,7 +72,7 @@ bool Hangman::win(const std::string &secretWord, const std::map<char, bool> &gue
 	return true;
 }
 
-bool Hangman::hanged(int errorCount) {
+bool Hangman::hanged(const int &errorCount) {
 	return errorCount >= MAX_TRIES;
 }
 
@@ -78,22 +80,23 @@ void Hangman::hangmanGame(const std::vector<std::string> &words) {
 	std::string secretWord = Hangman::chooseSecretWord(words);
 	// dictionary structure for storing keys and values, used here to verify if a letter was already guessed
 	std::map<char, bool> guessed;
-	std::vector<char> errors;
+	std::array<char, MAX_TRIES> errors{};
+	int errorCount = 0;
 
 	do {
 		// TODO: clear screen
-		Hangman::printGame(secretWord, guessed, errors);
-		Hangman::guess(secretWord, guessed, errors);
-	} while (!(Hangman::win(secretWord, guessed) || Hangman::hanged((int) errors.size())));
+		Hangman::printGame(secretWord, guessed, errors, errorCount);
+		Hangman::guess(secretWord, guessed, errors, errorCount);
+	} while (!(Hangman::hanged(errorCount) || Hangman::win(secretWord, guessed)));
 
 	// printing game one more time
-	Hangman::printGame(secretWord, guessed, errors);
+	Hangman::printGame(secretWord, guessed, errors, errorCount);
 
-	if (Hangman::hanged((int) errors.size())) {
+	if (Hangman::hanged(errorCount)) {
 		Hangman::printHanged();
 	} else {
 		Hangman::printWin();
-		if (errors.empty()) {
+		if (errorCount == 0) {
 			std::cout << "FLAWLESS VICTORY!" << std::endl;
 		}
 	}

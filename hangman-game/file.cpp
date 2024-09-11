@@ -2,25 +2,23 @@
 #include <iostream>
 #include "file.hpp"
 
-using namespace std;
-
-vector<string> getWords() {
+std::vector<std::string> Hangman::getWords() {
 	// input file stream
-	ifstream file;
+	std::ifstream file;
 	file.open(WORDS_FILE_NAME);
 
 	if (!file.is_open()) {
-		cerr << "\nWord database unreachable!\n\nexecution terminated" << endl;
+		std::cerr << "\nWord database unreachable!\n\nexecution terminated" << std::endl;
 		exit(-1);
 	}
 
 	int wordCount;
 	file >> wordCount;
 
-	vector<string> words;
+	std::vector<std::string> words;
 
 	for (int i = 0; i < wordCount; i++) {
-		string word;
+		std::string word;
 		file >> word;
 		words.push_back(word);
 	}
@@ -29,21 +27,21 @@ vector<string> getWords() {
 	return words;
 }
 
-void writeFile(vector<string> &words) {
+void Hangman::writeFile(const std::vector<std::string> &words) {
 	// output file stream
-	ofstream file;
+	std::ofstream file;
 	file.open(WORDS_FILE_NAME);
 
 	if (!file.is_open()) {
-		cerr << "\nWord database unreachable!\n\nexecution terminated" << endl;
+		std::cerr << "\nWord database unreachable!\n\nexecution terminated" << std::endl;
 		exit(-1);
 	}
 
 	int wordCount = (int) words.size();
-	file << wordCount << endl;
+	file << wordCount << std::endl;
 
-	for (string &word : words) {
-		file << word << endl;
+	for (const std::string &word : words) {
+		file << word << std::endl;
 	}
 
 	file.close();

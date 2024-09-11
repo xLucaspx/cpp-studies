@@ -6,16 +6,14 @@
 #include "hangman.hpp"
 #include "out.hpp"
 
-using namespace std;
-
-string chooseSecretWord(vector<string> &words) {
+std::string Hangman::chooseSecretWord(const std::vector<std::string> &words) {
 	srand((unsigned) time(nullptr));
 
 	int sortedIndex = (int) (rand() % words.size());
 	return words[sortedIndex];
 }
 
-bool stringContains(string &s, char element) {
+bool Hangman::stringContains(const std::string &s, char element) {
 /* a string is char vector. E.g.:
  * string s = "string" -> | s | t | r | i | n | g |
  *                        | 0 | 1 | 2 | 3 | 4 | 5 |
@@ -36,68 +34,68 @@ bool stringContains(string &s, char element) {
 	});
 }
 
-void guess(string &word, map<char, bool> &guessed, vector<char> &errors) {
+void Hangman::guess(const std::string &word, std::map<char, bool> &guessed, std::vector<char> &errors) {
 	char guess;
-	cout << "What's your guess? ";
-	cin >> guess;
+	std::cout << "What's your guess? ";
+	std::cin >> guess;
 
 	if (!isalpha(guess)) {
-		cout << "\nInvalid guess...\n" << endl;
+		std::cout << "\nInvalid guess...\n" << std::endl;
 		return;
 	}
 
 	guess = (char) toupper(guess);
 
 	if (guessed[guess]) {
-		cout << "\nYou've already typed that letter...\n" << endl;
+		std::cout << "\nYou've already typed that letter...\n" << std::endl;
 		return;
 	}
 
 	guessed[guess] = true;
-	if (!stringContains(word, guess)) {
-		cout << "\nThe secret word doesn't contain the letter " << guess << endl << endl;
+	if (!Hangman::stringContains(word, guess)) {
+		std::cout << "\nThe secret word doesn't contain the letter " << guess << std::endl << std::endl;
 		errors.push_back(guess);
 		return;
 	}
 
-	cout << "\nAlright! The secret word contains the letter " << guess << endl << endl;
+	std::cout << "\nAlright! The secret word contains the letter " << guess << std::endl << std::endl;
 }
 
-bool win(string &secretWord, map<char, bool> &guessed) {
+bool Hangman::win(const std::string &secretWord, const std::map<char, bool> &guessed) {
 	for (char c : secretWord) {
-		if (!guessed[c]) {
+		if (!(guessed.find(c) != guessed.end())) {
 			return false;
 		}
 	}
 	return true;
 }
 
-bool hanged(int errorCount) {
+bool Hangman::hanged(int errorCount) {
 	return errorCount >= MAX_TRIES;
 }
 
-void hangmanGame(vector<string> &words) {
-	string secretWord = chooseSecretWord(words);
+void Hangman::hangmanGame(const std::vector<std::string> &words) {
+	std::string secretWord = Hangman::chooseSecretWord(words);
 	// dictionary structure for storing keys and values, used here to verify if a letter was already guessed
-	map<char, bool> guessed;
-	vector<char> errors;
+	std::map<char, bool> guessed;
+	std::vector<char> errors;
 
 	do {
 		// TODO: clear screen
-		printGame(secretWord, guessed, errors);
-		guess(secretWord, guessed, errors);
-	} while (!(win(secretWord, guessed) || hanged((int) errors.size())));
+		Hangman::printGame(secretWord, guessed, errors);
+		Hangman::guess(secretWord, guessed, errors);
+	} while (!(Hangman::win(secretWord, guessed) || Hangman::hanged((int) errors.size())));
 
 	// printing game one more time
-	printGame(secretWord, guessed, errors);
+	Hangman::printGame(secretWord, guessed, errors);
 
-	if (hanged((int) errors.size())) {
-		printHanged();
+	if (Hangman::hanged((int) errors.size())) {
+		Hangman::printHanged();
 	} else {
-		printWin();
+		Hangman::printWin();
 		if (errors.empty()) {
-			cout << "FLAWLESS VICTORY!" << endl;
+			std::cout << "FLAWLESS VICTORY!" << std::endl;
 		}
 	}
-	cout << "\nThe secret word was -> " << secretWord << " <-\n" << endl;
+	std::cout << "\nThe secret word was -> " << secretWord << " <-\n" << std::endl;
 }

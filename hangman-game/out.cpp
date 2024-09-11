@@ -2,49 +2,50 @@
 #include "hangman.hpp"
 #include "out.hpp"
 
-using namespace std;
-
-void printGibbet(int errorCount) {
-	string head = errorCount >= 1 ? "(_)" : "";       // head      -> errors >= 1
-	string body = errorCount >= 4 ? "/|\\" :          // right arm -> errors >= 4
-								errorCount >= 3 ? "/|" :            // left arm  -> errors >= 3
-								errorCount >= 2 ? " |" : "";        // body      -> errors >= 2
-	string lowerBody = errorCount >= 2 ? " |" : "";    // body      -> errors >= 2
-	string legs = errorCount >= 5 ?                   // right leg -> errors >= 5
-								errorCount >= 6 ? "/\\" : "/" : ""; // left leg  -> errors >= 6
+void Hangman::printGibbet(int errorCount) {
+	std::string head = errorCount >= 1 ? "(_)" : "";       // head      -> errors >= 1
+	std::string body = errorCount >= 4 ? "/|\\" :          // right arm -> errors >= 4
+										 errorCount >= 3 ? "/|" :            // left arm  -> errors >= 3
+										 errorCount >= 2 ? " |" : "";        // body      -> errors >= 2
+	std::string lowerBody = errorCount >= 2 ? " |" : "";    // body      -> errors >= 2
+	std::string legs = errorCount >= 5 ?                   // right leg -> errors >= 5
+										 errorCount >= 6 ? "/\\" : "/" : ""; // left leg  -> errors >= 6
 
 	printf("\nLives: %d of %d\n", MAX_TRIES - errorCount, MAX_TRIES);
 
-	cout << "  _______ " << endl;
-	cout << " |/      |" << endl;
-	cout << " |      " << head << endl;
-	cout << " |      " << body << endl;
-	cout << " |      " << lowerBody << endl;
-	cout << " |      " << legs << endl;
-	cout << " |" << endl;
-	cout << "_|___\n\n" << endl;
+	std::cout << "  _______ " << std::endl;
+	std::cout << " |/      |" << std::endl;
+	std::cout << " |      " << head << std::endl;
+	std::cout << " |      " << body << std::endl;
+	std::cout << " |      " << lowerBody << std::endl;
+	std::cout << " |      " << legs << std::endl;
+	std::cout << " |" << std::endl;
+	std::cout << "_|___\n\n" << std::endl;
 }
 
-void printSecretWord(string &word, map<char, bool> &guesses) {
+void Hangman::printSecretWord(const std::string &word, const std::map<char, bool> &guesses) {
 	for (char c : word) {
-		cout << (guesses[c] ? c : '_') << " ";
+		// map operator [] to access c (map[c]) defines c as false if it doesn't exist on the map;
+		// therefore, using const we cannot use [] operator, so the following code doesn't work
+		// cout << (guesses[c] ? c : '_') << " ";
+		std::cout << (guesses.find(c) != guesses.end() ? c : '_') << " ";
 	}
-	cout << endl;
+	std::cout << std::endl;
 }
 
-void printWrongGuesses(vector<char> &errors) {
-	cout << "\nWrong letters:" << endl;
+void Hangman::printWrongGuesses(const std::vector<char> &errors) {
+	std::cout << "\nWrong letters:" << std::endl;
 
 	for (char c : errors) {
-		cout << c << " - ";
+		std::cout << c << " - ";
 	}
 
-	cout << endl;
+	std::cout << std::endl;
 }
 
-void printGame(string &word, map<char, bool> &guesses, vector<char> &errors) {
-	printGibbet((int) errors.size());
-	printSecretWord(word, guesses);
-	printWrongGuesses(errors);
-	cout << endl;
+void Hangman::printGame(const std::string &word, const std::map<char, bool> &guesses, const std::vector<char> &errors) {
+	Hangman::printGibbet((int) errors.size());
+	Hangman::printSecretWord(word, guesses);
+	Hangman::printWrongGuesses(errors);
+	std::cout << std::endl;
 }

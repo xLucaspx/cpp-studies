@@ -1,22 +1,19 @@
 #pragma once
 
 #include <string>
-#include "Cpf.hpp"
+#include "Pessoa.hpp"
+#include "Autenticavel.hpp"
 
-class Titular
+// : -> sintaxe de "extends" em C++
+// Repare no modificador de acesso: `public` significa que tudo o que é público em Pessoa
+// continuará sendo público em Titular; se fosse `protected`, o que é público tornaria-se
+// protegido e, caso fosse `private`, todos os membros públicos e protegidos de Pessoa se
+// tornariam privados em Titular. Este último tipo de herança é muito raro pois é como se
+// a herança privada não existisse para o mundo externo, i.e. códigos que utilizam o tipo
+// não tem como saber que a herança existe. A mais comum é public (não modifica a super).
+
+class Titular : public Pessoa, public Autenticavel // C++ permite herança múltipla
 {
-private:
-	Cpf cpf;
-	std::string nome;
-
 public:
-	Titular(std::string cpf, std::string nome);
-
-	[[nodiscard]] std::string getCpf() const;
-
-	[[nodiscard]] std::string getNome() const;
-
-
-private:
-	void validaNome();
+	Titular(std::string cpf, std::string nome, std::string senha);
 };

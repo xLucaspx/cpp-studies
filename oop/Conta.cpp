@@ -1,3 +1,4 @@
+#include <utility>
 #include "Conta.hpp"
 
 unsigned int Conta::totalContas = 0;
@@ -39,21 +40,13 @@ void Conta::depositar(float valor)
 
 void Conta::sacar(float valor)
 {
-	if (valor <= 0 || valor > saldo) {
+	float valorComTaxa = valor + (valor * taxaDeSaque());
+
+	if (valorComTaxa <= 0 || valorComTaxa > saldo) {
 		return;
 	}
 
-	saldo -= valor;
-}
-
-void Conta::transferir(Conta &destino, float valor)
-{
-	if (valor <= 0 || valor > saldo) {
-		return;
-	}
-
-	sacar(valor);
-	destino.depositar(valor);
+	saldo -= valorComTaxa;
 }
 
 std::string Conta::getNumero() const

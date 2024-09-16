@@ -1,4 +1,5 @@
 #include <iostream>
+#include <utility>
 #include "Cpf.hpp"
 
 Cpf::Cpf(std::string cpf)

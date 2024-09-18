@@ -1,8 +1,8 @@
 #include <utility>
 #include "Gerente.hpp"
 
-Gerente::Gerente(std::string cpf, std::string nome, float salario, std::string senha)
-		: Funcionario(std::move(cpf), std::move(nome), salario, std::move(senha))
+Gerente::Gerente(std::string cpf, std::string nome, float salario, DiaSemana diaPagamento, std::string senha)
+		: Funcionario(std::move(cpf), std::move(nome), salario, diaPagamento, std::move(senha))
 {}
 
 float Gerente::bonificacao() const

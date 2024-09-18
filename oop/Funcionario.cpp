@@ -1,13 +1,16 @@
 #include <utility>
 #include "Funcionario.hpp"
 
-Funcionario::Funcionario(std::string cpf, std::string nome, float salario, std::string senha)
-		: Pessoa(std::move(cpf), std::move(nome)), salario(salario), Autenticavel(std::move(senha))
+Funcionario::Funcionario(std::string cpf, std::string nome, float salario, DiaSemana diaPagamento, std::string senha)
+		: Pessoa(Cpf(std::move(cpf)), std::move(nome)),
+			salario(salario),
+			diaPagamento(diaPagamento),
+			Autenticavel(std::move(senha))
 {}
 
 std::string Funcionario::getCpf() const
 {
-	return cpf.getCpf();
+	return doc.getCpf();
 }
 
 float Funcionario::getSalario() const

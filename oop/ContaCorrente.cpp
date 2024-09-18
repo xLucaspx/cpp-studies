@@ -12,10 +12,12 @@ float ContaCorrente::taxaDeSaque() const
 
 void ContaCorrente::transferir(Conta &destino, float valor)
 {
-	if (valor <= 0 || valor > getSaldo()) {
+	auto resultadoSaque = sacar(valor);
+
+	// se o índice retornado na variant for o primeiro é porque ocorreu erro
+	if (resultadoSaque.index() == 0) {
 		return;
 	}
 
-	sacar(valor);
 	destino.depositar(valor);
 }

@@ -1,16 +1,19 @@
 #pragma once
 
 #include <string>
-#include "Pessoa.hpp"
 #include "Autenticavel.hpp"
+#include "Cpf.hpp"
+#include "DiaSemana.hpp"
+#include "Pessoa.hpp"
 
-class Funcionario : public Pessoa, public Autenticavel
+class Funcionario : public Pessoa<Cpf>, public Autenticavel
 {
 private:
 	float salario;
+	DiaSemana diaPagamento;
 
 public:
-	Funcionario(std::string cpf, std::string nome, float salario, std::string senha);
+	Funcionario(std::string cpf, std::string nome, float salario, DiaSemana diaPagamento, std::string senha);
 
 	[[nodiscard]] std::string getCpf() const;
 

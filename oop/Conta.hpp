@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <variant>
 #include "Titular.hpp"
 
 class Conta
@@ -13,6 +14,11 @@ private:
 
 public:
 	static unsigned int getTotalContas();
+
+	enum ErroSaque
+	{
+		SALDO_INSUFICIENTE, VALOR_INVALIDO
+	};
 
 private: // definindo explicitamente para melhorar a legibilidade!
 	std::string numero;
@@ -28,7 +34,17 @@ public:
 
 	void depositar(float valor);
 
-	void sacar(float valor);
+	void operator+=(float valor); // operator overload
+	// Em C++ não há resolução de overload entre classes base e derivadas. E.g.: se, em ContaCorrente tivermos outra
+	// função `operator+=` o compilador sempre buscará a implementação da função no escopo da instância que foi chamada,
+	// i.e. se chamarmos de Conta será a de Conta e se chamarmos de ContaCorrente será a de conta corrente, mesmo que os
+	// parâmetros sejam diferentes. Isso é Name Hiding, não Overloading!
+
+	bool operator<(const Conta& outra) const;
+
+	std::variant<Conta::ErroSaque, float> sacar(float valor);
+	// Em C++, a partir da versão 17, quando queremos retornar um tipo OU outro, podemos usar variant; nesse caso, se
+	// ocorrer um erro vamos informar com o enum ErroSaque e, em caso de sucesso, vamos retornar o novo saldo.
 
 	[[nodiscard]] virtual float taxaDeSaque() const = 0;
 	// método virtual: a implementação que será chamada depende da instância do objeto que chamou (polimorfismo).

@@ -37,16 +37,28 @@ void Conta::depositar(float valor)
 	saldo += valor;
 }
 
+void Conta::operator+=(float valor)
+{
+	depositar(valor);
+}
 
-void Conta::sacar(float valor)
+bool Conta::operator<(const Conta &outra) const
+{
+	return saldo < outra.saldo;
+}
+
+std::variant<Conta::ErroSaque, float> Conta::sacar(float valor)
 {
 	float valorComTaxa = valor + (valor * taxaDeSaque());
 
-	if (valorComTaxa <= 0 || valorComTaxa > saldo) {
-		return;
+	if (valorComTaxa <= 0) {
+		return ErroSaque::VALOR_INVALIDO;
+	} else if (valorComTaxa > saldo) {
+		return ErroSaque::SALDO_INSUFICIENTE;
 	}
 
 	saldo -= valorComTaxa;
+	return saldo;
 }
 
 std::string Conta::getNumero() const

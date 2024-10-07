@@ -6,7 +6,8 @@
 #include <string>
 #include <vector>
 
-namespace Hangman {
+namespace Hangman
+{
 	/**
 	* Choose a random word from the vector of strings passed as argument.
 	*

@@ -16,9 +16,9 @@ unsigned int Conta::totalContas = 0;
 // É uma boa prática inicializar na mesma ordem que os membros foram declarados na classe!
 
 Conta::Conta(std::string numero, Titular titular)
-		: numero(std::move(numero)),
-			titular(std::move(titular)),
-			saldo(0.0f)
+	: numero(std::move(numero)),
+	  titular(std::move(titular)),
+	  saldo(0.0f)
 {
 	totalContas++;
 }

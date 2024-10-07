@@ -2,8 +2,9 @@
 #include "ContaCorrente.hpp"
 
 ContaCorrente::ContaCorrente(std::string numero, Titular titular)
-		: Conta(std::move(numero), std::move(titular))
-{}
+	: Conta(std::move(numero), std::move(titular))
+{
+}
 
 float ContaCorrente::taxaDeSaque() const
 {

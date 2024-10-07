@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <string>
-#include "Cpf.hpp"
 
 // Quando criamos uma template class, todas as definições e implementações devem ficar apenas
 // no arquivo de cabeçalho, pois o compilador que irá gerar o código e as implementações! Aqui,
@@ -22,7 +21,7 @@ protected:
 
 public:
 	Pessoa(Doc documento, std::string nome)
-			: doc(std::move(documento)), nome(std::move(nome))
+		: doc(std::move(documento)), nome(std::move(nome))
 	{
 		validaNome();
 	}
@@ -34,6 +33,7 @@ public:
 
 
 	friend std::ostream &operator<<(std::ostream &out, const Pessoa &p);
+
 	// friend function: declarada em outro lugar mas pode acessar a classe como se fosse membro!
 
 private:

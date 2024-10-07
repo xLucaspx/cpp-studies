@@ -37,16 +37,16 @@ void realizaSaque(Conta &conta, float valor)
 	}
 }
 
-void printFuncionario(Funcionario &f)
+void printFuncionario(const Funcionario &f)
 {
 	printf("funcionario: { nome: %s, cpf: %s, salario: R$ %.2f, bonus: R$ %.2f }\n",
-				 f.getNome().c_str(), f.getCpf().c_str(), f.getSalario(), f.bonificacao());
+	       f.getNome().c_str(), f.getCpf().c_str(), f.getSalario(), f.bonificacao());
 }
 
-void printConta(Conta &c)
+void printConta(const Conta &c)
 {
 	printf("conta: { numero: %s, nome: %s, saldo: R$ %.2f }\n",
-				 c.getNumero().c_str(), c.getTitular().getNome().c_str(), c.getSaldo());
+	       c.getNumero().c_str(), c.getTitular().getNome().c_str(), c.getSaldo());
 }
 
 // operator overload para printar DiaSemana
@@ -104,6 +104,7 @@ T menor(T a, T b)
 	// nos parâmetros; ele também pode ser usado no corpo da função ou no retorno dela também.
 	return a < b ? a : b;
 }
+
 // Também podemos informar valores para templates; isso é útil quando, embora seja um parâmetro,
 // o valor precisar estar no código em tempo de compilação. E.g.: Para criar um array na stack
 // precisamos saber seu tamanho em tempo de compilação. Basta trocar `typename` pelo tipo em questão
@@ -113,10 +114,10 @@ int main()
 {
 	// em C++, não precisamos utilizar a palavra struct na declaração da variável
 	ContaCorrente c1{
-			"12345",
-			// em C++, é mais performático passar o objeto direto no construtor do que
-			// guardá-lo em uma variável temporária, pois assim ocorrem menos cópias
-			Titular("12345678909", "Fulano de Tal", "senha123")
+		"12345",
+		// em C++, é mais performático passar o objeto direto no construtor do que
+		// guardá-lo em uma variável temporária, pois assim ocorrem menos cópias
+		Titular("12345678909", "Fulano de Tal", "senha123")
 	};
 
 	ContaPoupanca c2("54321", Titular("01234567800", "Pafuncia da Silva", "senha456"));

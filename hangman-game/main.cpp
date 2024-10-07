@@ -1,6 +1,7 @@
 #include "app.hpp"
 
-int main() {
+int main()
+{
 	Hangman::run();
 	return 0;
 }

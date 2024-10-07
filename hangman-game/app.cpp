@@ -6,16 +6,19 @@
 #include "hangman.hpp"
 #include "out.hpp"
 
-void Hangman::addWord(std::vector<std::string> &words) {
+void Hangman::addWord(std::vector<std::string> &words)
+{
 	std::cout << "Type in the new word: ";
 	std::string newWord;
 	std::cin >> newWord;
 
+	constexpr int minLength = MIN_WORD_LENGTH;
+	constexpr int maxLength = MAX_WORD_LENGTH;
 	// ^[a-zA-Z]{3,20}$ {{ is the escape sequence and {} is where the args are going to be placed
-	std::string newWordRegex = vformat("^[a-zA-Z]{{{},{}}}$", std::make_format_args(MIN_WORD_LENGTH, MAX_WORD_LENGTH));
+	std::string newWordRegex = std::vformat("^[a-zA-Z]{{{},{}}}$", std::make_format_args(minLength, maxLength));
 	if (!regex_match(newWord, std::regex(newWordRegex))) {
 		printf("\nInvalid value!\nWords must have a length between %d and %d and contain only letters!\n\n",
-					 MIN_WORD_LENGTH, MAX_WORD_LENGTH);
+		       MIN_WORD_LENGTH, MAX_WORD_LENGTH);
 		return;
 	}
 
@@ -33,7 +36,8 @@ void Hangman::addWord(std::vector<std::string> &words) {
 	Hangman::writeFile(words);
 }
 
-void Hangman::run() {
+void Hangman::run()
+{
 	Hangman::printHeader();
 	std::vector<std::string> words = Hangman::getWords();
 	while (words.empty()) {

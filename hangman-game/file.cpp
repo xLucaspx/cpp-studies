@@ -2,7 +2,8 @@
 #include <iostream>
 #include "file.hpp"
 
-std::vector<std::string> Hangman::getWords() {
+std::vector<std::string> Hangman::getWords()
+{
 	// input file stream
 	std::ifstream file;
 	file.open(WORDS_FILE_NAME);
@@ -28,7 +29,8 @@ std::vector<std::string> Hangman::getWords() {
 	return words;
 }
 
-void Hangman::writeFile(const std::vector<std::string> &words) {
+void Hangman::writeFile(const std::vector<std::string> &words)
+{
 	// output file stream
 	std::ofstream file;
 	file.open(WORDS_FILE_NAME);

@@ -5,7 +5,8 @@
 #include <string>
 #include <vector>
 
-namespace Hangman {
+namespace Hangman
+{
 	/**
 	 * Reads the word typed by the user, validates it (only letters, length between <code>MIN_WORD_LENGTH</code>
 	 * and <code>MAX_WORD_LENGTH</code> constants), ensures uppercase, check if it doesn't already exist in the

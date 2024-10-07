@@ -12,4 +12,3 @@ public:
 
 	[[nodiscard]] bool autentica(const std::string &senha) const;
 };
-

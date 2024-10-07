@@ -28,7 +28,7 @@ void Hangman::printSecretWord(const std::string &word, const std::map<char, bool
 		// map operator [] to access c (map[c]) defines c as false if it doesn't exist on the map;
 		// therefore, using const we cannot use [] operator, so the following code doesn't work
 		// cout << (guesses[c] ? c : '_') << " ";
-		std::cout << (guesses.find(c) != guesses.end() ? c : '_') << " ";
+		std::cout << (guesses.contains(c) ? c : '_') << " ";
 	}
 	std::cout << std::endl;
 }

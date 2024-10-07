@@ -4,7 +4,8 @@
 #include <string>
 #include <vector>
 
-namespace Hangman {
+namespace Hangman
+{
 	/**
 	* Retrieves all words available for the game.
 	* Terminates program execution in case of error.

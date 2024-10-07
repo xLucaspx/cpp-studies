@@ -4,13 +4,14 @@
 #include <iostream>
 #include <map>
 #include <string>
-#include <vector>
 
-namespace Hangman {
+namespace Hangman
+{
 	/**
 	* Prints the game header.
 	*/
-	inline void printHeader() {
+	inline void printHeader()
+	{
 		std::cout << "  _______ " << std::endl;
 		std::cout << " |/      |" << std::endl;
 		std::cout << " |" << std::endl;
@@ -24,7 +25,8 @@ namespace Hangman {
 	/**
 	* Prints the game menu options.
 	*/
-	inline void printMenu() {
+	inline void printMenu()
+	{
 		std::cout << "-- MENU --\n" << std::endl;
 		std::cout << "[1] Play game" << std::endl;
 		std::cout << "[2] Add word\n" << std::endl;
@@ -33,7 +35,8 @@ namespace Hangman {
 	/**
 	* Procedure for printing a lost game message.
 	*/
-	inline void printHanged() {
+	inline void printHanged()
+	{
 		std::cout << "      _______________" << std::endl;
 		std::cout << "     /               \\" << std::endl;
 		std::cout << "    /                 \\" << std::endl;
@@ -56,7 +59,8 @@ namespace Hangman {
 	/**
 	* Procedure for printing a game win message.
 	*/
-	inline void printWin() {
+	inline void printWin()
+	{
 		std::cout << "       ___________" << std::endl;
 		std::cout << "      '._==_==_=_.'" << std::endl;
 		std::cout << "      .-\\:      /-." << std::endl;
@@ -128,7 +132,8 @@ namespace Hangman {
 	/**
 	* Prints all the wrong guesses passed as argument
 	*
-	* @param errors the vector containing the wrong guesses
+	* @param errors array containing the wrong guesses
+	* @param errorCount total wrong guesses
 	*/
 	void printWrongGuesses(const std::array<char, 6> &errors, const int &errorCount);
 
@@ -138,8 +143,9 @@ namespace Hangman {
 	* @param word the secret word
 	* @param guesses map containing, for each letter, a <code>boolean</code> value for guessed
 	* (<code>true</code> for guessed letters, <code>false</code> otherwise)
-	* @param errors the vector containing the wrong guesses
+	* @param errors array containing the wrong guesses
+	* @param errorCount total wrong guesses
 	*/
 	void printGame(const std::string &word, const std::map<char, bool> &guesses, const std::array<char, 6> &errors,
-								 const int &errorCount);
+	               const int &errorCount);
 }

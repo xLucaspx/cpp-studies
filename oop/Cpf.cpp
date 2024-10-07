@@ -3,7 +3,7 @@
 #include "Cpf.hpp"
 
 Cpf::Cpf(std::string cpf)
-		: m_Cpf(std::move(cpf))
+	: m_Cpf(std::move(cpf))
 {
 	validaCpf();
 }
